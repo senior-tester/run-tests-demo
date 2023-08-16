@@ -52,7 +52,7 @@ jobs:
           https://api.github.com/repos/senior-tester/run-tests-demo/actions/artifacts/$REPORT_ID/zip 
           -o pages.zip
       - run: mkdir allure-results && unzip artifacts.zip -d allure-results
-      - run: mkdir old_pages && unzip pages.zip -d old_pages && tar -xvf old_pages/artifact.tar -C pages_history
+      - run: mkdir old_pages pages_history && unzip pages.zip -d old_pages && tar -xvf old_pages/artifact.tar -C pages_history
       - run: cp pages_history/history/* allure-results && cp pages_history/history allure-results
       - name: Store allure history
         uses: actions/upload-artifact@v3
