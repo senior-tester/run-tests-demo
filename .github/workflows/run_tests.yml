@@ -20,6 +20,7 @@ permissions:
 
 jobs:
   download-history:
+    if: false
     runs-on: ubuntu-latest
     name: Download history
     steps:
