@@ -11,7 +11,7 @@ env:
   ALLURE_TOKEN: ${{ secrets.ALLURE_TOKEN }}
   ALLURE_JOB_RUN_ID: ${{ github.event.inputs.ALLURE_JOB_RUN_ID }}
   ALLURE_ENDPOINT: https://seniortester.testops.cloud/
-  ALLURE_PROJECT_ID: 1
+  ALLURE_PROJECT_ID: 34
   ALLURE_RESULTS: allure-results
       
 
@@ -41,8 +41,9 @@ jobs:
         with:
           allure-endpoint: $(ALLURE_ENDPOINT)
           allure-token: ${{ secrets.ALLURE_TOKEN }}
-          allure-project-id: $(ALLURE_PROJECT_ID)
+          allure-project-id: $ALLURE_PROJECT_ID
       - name: run all tests
+        # run: echo $ALLURE_PROJECT_ID
         run: allurectl watch -- pytest --alluredir=allure-results
         # continue-on-error: true
       - name: Store allure results
