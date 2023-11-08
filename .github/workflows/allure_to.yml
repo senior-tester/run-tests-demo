@@ -41,7 +41,7 @@ jobs:
         with:
           allure-endpoint: $(ALLURE_ENDPOINT)
           allure-token: ${{ secrets.ALLURE_TOKEN }}
-          allure-project-id: $ALLURE_PROJECT_ID
+          allure-project-id: ${ALLURE_PROJECT_ID}
       - name: run all tests
         # run: echo $ALLURE_PROJECT_ID
         run: allurectl watch -- pytest --alluredir=allure-results
