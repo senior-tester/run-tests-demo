@@ -39,7 +39,7 @@ jobs:
       - name: Install allurectl
         uses: allure-framework/setup-allurectl@v1
         with:
-          allure-endpoint: $(ALLURE_ENDPOINT)
+          allure-endpoint: https://seniortester.testops.cloud/
           allure-token: ${{ secrets.ALLURE_TOKEN }}
           allure-project-id: 34
       - name: run all tests
