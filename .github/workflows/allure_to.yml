@@ -36,9 +36,15 @@ jobs:
         run: sudo apt-get install google-chrome-stable
       - name: install dependencies
         run: pip install -r requirements.txt
+      - name: Install allurectl
+        uses: allure-framework/setup-allurectl@v1
+        with:
+          allure-endpoint: $(ALLURE_ENDPOINT)
+          allure-token: ${{ secrets.ALLURE_TOKEN }}
+          allure-project-id: $(ALLURE_PROJECT_ID)
       - name: run all tests
-        run: pytest --alluredir=allure-results
-        continue-on-error: true
+        run: allurectl watch -- pytest --alluredir=allure-results
+        # continue-on-error: true
       - name: Store allure results
         uses: actions/upload-artifact@v3
         with:
