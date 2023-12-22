@@ -1,5 +1,5 @@
 
-name: Automated tests
+name: Allure to server
 
 on:
   workflow_dispatch:
