@@ -60,7 +60,7 @@ jobs:
           "http://${{ secrets.SERVER }}/api/report" 
           -H 'accept: */*' 
           -H 'Content-Type: application/json' 
-          -d "{\"reportSpec\":{\"path\":[\"pathstring\"],\"executorInfo\":{\"name\":\"execname\",\"type\":\"exectype\",\"url\":\"execurl\",\"buildOrder\":0,\"buildName\":\"mybuild_name\",\"buildUrl\":\"may_build_url\",\"reportName\":\"my_report_name\",\"reportUrl\":\"my_report_url\"}},\"results\":[\"$UUID\"],\"deleteResults\":true}"
+          -d "{\"reportSpec\":{\"path\":[\"pathstring\"],\"executorInfo\":{\"name\":\"GitHub\",\"type\":\"exectype\",\"url\":\"https://github.com/senior-tester/run-tests-demo/actions/workflows/server.yml\",\"buildOrder\":0,\"buildName\":\"$GITHUB_RUN_NUMBER\",\"buildUrl\":\"may_build_url\",\"reportName\":\"my_report_name\",\"reportUrl\":\"my_report_url\"}},\"results\":[\"$UUID\"],\"deleteResults\":true}"
       - name: Store allure results
         uses: actions/upload-artifact@v3
         with:
