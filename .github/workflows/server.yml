@@ -47,6 +47,20 @@ jobs:
         if: "github.event.inputs.deployment_target == 'all'"
         run: pytest --alluredir=allure-results
         continue-on-error: true
+      - run: sudo apt install zip && zip -r allure-results.zip allure-results
+      - name: upload results
+        run: >
+          UUID=$(curl -X "POST" "http://{{ secrets.SERVER }}/api/result" 
+          -H 'accept: */*' 
+          -H 'Content-Type: multipart/form-data' 
+          -F 'allureResults=@allure-results.zip;type=application/zip' 
+          | python3 -c "import sys, json; print(json.load(sys.stdin)['uuid']);") 
+          &&
+          curl -X 'POST' 
+          "http://{{ secrets.SERVER }}/api/report" 
+          -H 'accept: */*' 
+          -H 'Content-Type: application/json' 
+          -d "{\"reportSpec\":{\"path\":[\"pathstring\"],\"executorInfo\":{\"name\":\"execname\",\"type\":\"exectype\",\"url\":\"execurl\",\"buildOrder\":0,\"buildName\":\"mybuild_name\",\"buildUrl\":\"may_build_url\",\"reportName\":\"my_report_name\",\"reportUrl\":\"my_report_url\"}},\"results\":[\"$UUID\"],\"deleteResults\":true}"
       - name: Store allure results
         uses: actions/upload-artifact@v3
         with:
